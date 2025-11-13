@@ -1,5 +1,3 @@
-using System.Text;
-using System.Text.Json.Serialization;
 using EFilmStore.Data;
 using EFilmStore.Mappings;
 using EFilmStore.Services;
@@ -8,16 +6,18 @@ using EFilmStore.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;  // ‚Üê ADD THIS LINE
+using Microsoft.EntityFrameworkCore.Design;  // ‚Üê AND THIS ONE
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Databasen a
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
@@ -65,7 +65,7 @@ builder.Services.AddSwaggerGen(c =>
     {
         Title = "EFilmStore API",
         Version = "v1",
-        Description = "API fˆr filmbutik",
+        Description = "API fÔøΩr filmbutik",
         Contact = new OpenApiContact { Name = "Support", Email = "support@efilmstore.com" }
     });
 });
@@ -84,7 +84,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthentication(); // viktigt att denna kommer fˆre UseAuthorization
+app.UseAuthentication(); // viktigt att denna kommer fÔøΩre UseAuthorization
 app.UseAuthorization();
 app.MapControllers();
 
