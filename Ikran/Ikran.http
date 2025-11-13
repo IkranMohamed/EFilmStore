@@ -1,0 +1,6 @@
+@Ikran_HostAddress = http://localhost:5163
+
+GET {{Ikran_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
